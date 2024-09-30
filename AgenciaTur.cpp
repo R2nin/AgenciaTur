@@ -98,3 +98,84 @@ void leitura_cidades(vector<Cidade>& cidades) {
     cidades.push_back(cidade4);
     cidades.push_back(cidade5);
 }
+
+//Funcoes de Inclusao
+
+void incluir_guia(vector<Guia>& guias, vector<Cidade>& cidades, vector<Pais>& paises) {
+    Guia guia;
+    cout << "Codigo do Guia: ";
+    cin >> guia.codigo_guia;
+
+    // Verificar se o código do guia já existe
+    for (const auto& g : guias) {
+        if (g.codigo_guia == guia.codigo_guia) {
+            cout << "Codigo de guia ja existe." << endl;
+            return;
+        }
+    }
+
+    cout << "Nome: ";
+    cin.ignore();
+    getline(cin, guia.nome);
+    cout << "Endereco: ";
+    getline(cin, guia.endereco);
+    cout << "Telefone: ";
+    getline(cin, guia.telefone);
+    cout << "Codigo da Cidade: ";
+    cin >> guia.codigo_cidade;
+
+    // Buscar cidade e país
+    for (const auto& cidade : cidades) {
+        if (cidade.codigo_cidade == guia.codigo_cidade) {
+            cout << "Cidade: " << cidade.nome << ", UF: " << cidade.UF << endl;
+            for (const auto& pais : paises) {
+                if (pais.codigo_pais == cidade.codigo_pais) {
+                    cout << "Pais: " << pais.nome << endl;
+                    break;
+                }
+            }
+            break;
+        }
+    }
+
+    guias.push_back(guia);
+}
+
+void incluir_cliente(vector<Cliente>& clientes, vector<Cidade>& cidades, vector<Pais>& paises) {
+    Cliente cliente;
+    cout << "Codigo do Cliente: ";
+    cin >> cliente.codigo_cliente;
+
+    // Verificar se o código do cliente já existe
+    for (const auto& c : clientes) {
+        if (c.codigo_cliente == cliente.codigo_cliente) {
+            cout << "Codigo de cliente ja existe." << endl;
+            return;
+        }
+    }
+
+    cout << "Nome: ";
+    cin.ignore();
+    getline(cin, cliente.nome);
+    cout << "Endereco: ";
+    getline(cin, cliente.endereco);
+    cout << "Codigo da Cidade: ";
+    cin >> cliente.codigo_cidade;
+
+    // Buscar cidade e país
+    for (const auto& cidade : cidades) {
+        if (cidade.codigo_cidade == cliente.codigo_cidade) {
+            cout << "Cidade: " << cidade.nome << ", UF: " << cidade.UF << endl;
+            for (const auto& pais : paises) {
+                if (pais.codigo_pais == cidade.codigo_pais) {
+                    cout << "Pais: " << pais.nome << endl;
+                    break;
+                }
+            }
+            break;
+        }
+    }
+
+    cliente.status = false;
+    clientes.push_back(cliente);
+}
