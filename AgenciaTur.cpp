@@ -70,3 +70,31 @@ struct IndiceCliente {
     int codigo_cliente;
     int ender;
 };
+
+//Funcoes de Leitura
+
+void leitura_paises(vector<Pais>& paises) {
+    Pais pais1 = {1, "Brasil"};
+    Pais pais2 = {2, "Estados Unidos"};
+    Pais pais3 = {3, "Franca"};
+    Pais pais4 = {4, "Japao"};
+    Pais pais5 = {5, "Alemanha"};
+    paises.push_back(pais1);
+    paises.push_back(pais2);
+    paises.push_back(pais3);
+    paises.push_back(pais4);
+    paises.push_back(pais5);
+}
+
+void leitura_cidades(vector<Cidade>& cidades) {
+    Cidade cidade1 = {1, "Sao Paulo", "SP", 1};
+    Cidade cidade2 = {2, "New York", "NY", 2};
+    Cidade cidade3 = {3, "Paris", "IDF", 3};
+    Cidade cidade4 = {4, "Tokyo", "TYO", 4};
+    Cidade cidade5 = {5, "Berlin", "BER", 5};
+    cidades.push_back(cidade1);
+    cidades.push_back(cidade2);
+    cidades.push_back(cidade3);
+    cidades.push_back(cidade4);
+    cidades.push_back(cidade5);
+}
