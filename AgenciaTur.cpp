@@ -179,3 +179,58 @@ void incluir_cliente(vector<Cliente>& clientes, vector<Cidade>& cidades, vector<
     cliente.status = false;
     clientes.push_back(cliente);
 }
+
+//Funcoes de Exclusao
+
+void excluir_cliente(vector<Cliente>& clientes, vector<Venda>& vendas) {
+    int codigo;
+    cout << "Codigo do Cliente a ser excluido: ";
+    cin >> codigo;
+
+    // Verificar se o cliente possui vendas
+    for (const auto& venda : vendas) {
+        if (venda.codigo_cliente == codigo) {
+            cout << "Cliente possui vendas cadastradas. Exclusao nao permitida." << endl;
+            return;
+        }
+    }
+
+    // Excluir cliente
+    for (auto& cliente : clientes) {
+        if (cliente.codigo_cliente == codigo) {
+            cliente.status = true;
+            cout << "Cliente excluido com sucesso." << endl;
+            return;
+        }
+    }
+
+    cout << "Cliente nao encontrado." << endl;
+}
+
+void excluir_guia(vector<Guia>& guias, vector<Pacote>& pacotes) {
+    int codigo;
+    cout << "Codigo do Guia a ser excluido: ";
+    cin >> codigo;
+
+    // Verificar se o guia possui pacotes
+    for (const auto& pacote : pacotes) {
+        if (pacote.codigo_guia == codigo) {
+            cout << "Guia possui pacotes cadastrados. Exclusao nao permitida." << endl;
+            return;
+        }
+    }
+
+    // Excluir guia
+    for (auto it = guias.begin(); it != guias.end(); ++it) {
+        if (it->codigo_guia == codigo) {
+            guias.erase(it);
+            cout << "Guia excluido com sucesso." << endl;
+            return;
+        }
+    }
+
+    cout << "Guia nao encontrado." << endl;
+}
+
+//Funcoes de Inclusao de Pacotes e Vendas
+
