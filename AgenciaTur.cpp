@@ -1,4 +1,4 @@
-//Estruturas
+// Estruturas
 #include <iostream>
 #include <string>
 #include <vector>
@@ -71,7 +71,7 @@ struct IndiceCliente {
     int ender;
 };
 
-//Funcoes de Leitura
+// Funções de Leitura
 
 void leitura_paises(vector<Pais>& paises) {
     Pais pais1 = {1, "Brasil"};
@@ -99,7 +99,7 @@ void leitura_cidades(vector<Cidade>& cidades) {
     cidades.push_back(cidade5);
 }
 
-//Funcoes de Inclusao
+// Funções de Inclusão
 
 void incluir_guia(vector<Guia>& guias, vector<Cidade>& cidades, vector<Pais>& paises) {
     Guia guia;
@@ -180,7 +180,7 @@ void incluir_cliente(vector<Cliente>& clientes, vector<Cidade>& cidades, vector<
     clientes.push_back(cliente);
 }
 
-//Funcoes de Exclusao
+// Funções de Exclusão
 
 void excluir_cliente(vector<Cliente>& clientes, vector<Venda>& vendas) {
     int codigo;
@@ -232,7 +232,7 @@ void excluir_guia(vector<Guia>& guias, vector<Pacote>& pacotes) {
     cout << "Guia nao encontrado." << endl;
 }
 
-//Funcoes de Inclusao de Pacotes e Vendas
+// Funções de Inclusão de Pacotes e Vendas
 
 void incluir_pacote(vector<Pacote>& pacotes, vector<Guia>& guias, vector<Cidade>& cidades, vector<Pais>& paises) {
     Pacote pacote;
@@ -282,116 +282,7 @@ void incluir_pacote(vector<Pacote>& pacotes, vector<Guia>& guias, vector<Cidade>
     pacotes.push_back(pacote);
 }
 
-void incluir_venda(vector<Venda>& vendas, vector<Cliente>& clientes, vector<Pacote>& pacotes) {
-    Venda venda;
-    cout << "Codigo da Venda: ";
-    cin >> venda.codigo_venda;
-
-    // Verificar se o código da venda já existe
-    for (const auto& v : vendas) {
-        if (v.codigo_venda == venda.codigo_venda) {
-            cout << "Codigo de venda ja existe." << endl;
-            return;
-        }
-    }
-
-    cout << "Codigo do Cliente: ";
-    cin >> venda.codigo_cliente;
-
-    // Buscar cliente
-    for (const auto& cliente : clientes) {
-        if (cliente.codigo_cliente == venda.codigo_cliente && !cliente.status) {
-            cout << "Cliente: " << cliente.nome << endl;
-            for (const auto& cidade : cidades) {
-                if (cidade.codigo_cidade == cliente.codigo_cidade) {
-                    cout << "Cidade: " << cidade.nome << ", UF: " << cidade.UF << endl;
-                    break;
-                }
-            }
-            break;
-        }
-    }
-
-    cout << "Codigo do Pacote: ";
-    cin >> venda.codigo_pacote;
-
-    // Buscar pacote
-    for (auto& pacote : pacotes) {
-        if (pacote.codigo_pacote == venda.codigo_pacote) {
-            cout << "Pacote: " << pacote.descricao << endl;
-            cout << "Guia: " << pacote.codigo_guia << endl;
-            cout << "Valor por Pessoa: " << pacote.valor_por_pessoa << endl;
-            cout << "Quantidade Maxima de Participantes: " << pacote.quant_max_participantes << endl;
-
-            cout << "Quantidade de Pessoas: ";
-            cin >> venda.quantidade_pessoas;
-
-            // Verificar se a quantidade de pessoas excede o máximo permitido
-            if (pacote.total_participantes + venda.quantidade_pessoas > pacote.quant_max_participantes) {
-                cout << "Quantidade de pessoas excede o maximo permitido." << endl;
-                return;
-            }
-
-            pacote.total_participantes += venda.quantidade_pessoas;
-            venda.valor_total = venda.quantidade_pessoas * pacote.valor_por_pessoa;
-            cout << "Valor Total: " << venda.valor_total << endl;
-
-            vendas.push_back(venda);
-            return;
-        }
-    }
-
-    cout << "Pacote nao encontrado." << endl;
-}
-void incluir_pacote(vector<Pacote>& pacotes, vector<Guia>& guias, vector<Cidade>& cidades, vector<Pais>& paises) {
-    Pacote pacote;
-    cout << "Codigo do Pacote: ";
-    cin >> pacote.codigo_pacote;
-
-    // Verificar se o código do pacote já existe
-    for (const auto& p : pacotes) {
-        if (p.codigo_pacote == pacote.codigo_pacote) {
-            cout << "Codigo de pacote ja existe." << endl;
-            return;
-        }
-    }
-
-    cout << "Descricao: ";
-    cin.ignore();
-    getline(cin, pacote.descricao);
-    cout << "Codigo do Guia: ";
-    cin >> pacote.codigo_guia;
-
-    // Buscar guia, cidade e país
-    for (const auto& guia : guias) {
-        if (guia.codigo_guia == pacote.codigo_guia) {
-            cout << "Guia: " << guia.nome << endl;
-            for (const auto& cidade : cidades) {
-                if (cidade.codigo_cidade == guia.codigo_cidade) {
-                    cout << "Cidade: " << cidade.nome << ", UF: " << cidade.UF << endl;
-                    for (const auto& pais : paises) {
-                        if (pais.codigo_pais == cidade.codigo_pais) {
-                            cout << "Pais: " << pais.nome << endl;
-                            break;
-                        }
-                    }
-                    break;
-                }
-            }
-            break;
-        }
-    }
-
-    cout << "Valor por Pessoa: ";
-    cin >> pacote.valor_por_pessoa;
-    pacote.total_participantes = 0;
-    cout << "Quantidade Maxima de Participantes: ";
-    cin >> pacote.quant_max_participantes;
-
-    pacotes.push_back(pacote);
-}
-
-void incluir_venda(vector<Venda>& vendas, vector<Cliente>& clientes, vector<Pacote>& pacotes) {
+void incluir_venda(vector<Venda>& vendas, vector<Cliente>& clientes, vector<Pacote>& pacotes, vector<Cidade>& cidades) {
     Venda venda;
     cout << "Codigo da Venda: ";
     cin >> venda.codigo_venda;
@@ -453,7 +344,7 @@ void incluir_venda(vector<Venda>& vendas, vector<Cliente>& clientes, vector<Paco
     cout << "Pacote nao encontrado." << endl;
 }
 
-// Funcoes de Consulta e Reorganizacao
+// Funções de Consulta e Reorganização
 
 void consultar_pacote(vector<Pacote>& pacotes, vector<Guia>& guias, vector<Cidade>& cidades, vector<Pais>& paises) {
     int codigo;
@@ -567,8 +458,7 @@ void reorganizar_clientes(vector<Cliente>& clientes) {
     cout << "Reorganizacao de clientes concluida." << endl;
 }
 
-
-// Funçao de Menu
+// Função de Menu
 
 void menu(vector<Pais>& paises, vector<Cidade>& cidades, vector<Guia>& guias, vector<Cliente>& clientes, vector<Pacote>& pacotes, vector<Venda>& vendas) {
     int opcao;
@@ -605,7 +495,7 @@ void menu(vector<Pais>& paises, vector<Cidade>& cidades, vector<Guia>& guias, ve
                 incluir_pacote(pacotes, guias, cidades, paises);
                 break;
             case 6:
-                incluir_venda(vendas, clientes, pacotes);
+                incluir_venda(vendas, clientes, pacotes, cidades);
                 break;
             case 7:
                 consultar_pacote(pacotes, guias, cidades, paises);
@@ -626,4 +516,22 @@ void menu(vector<Pais>& paises, vector<Cidade>& cidades, vector<Guia>& guias, ve
                 cout << "Opcao invalida." << endl;
         }
     } while (opcao != 0);
+}
+
+// Função Main
+
+int main() {
+    vector<Pais> paises;
+    vector<Cidade> cidades;
+    vector<Guia> guias;
+    vector<Cliente> clientes;
+    vector<Pacote> pacotes;
+    vector<Venda> vendas;
+
+    leitura_paises(paises);
+    leitura_cidades(cidades);
+
+    menu(paises, cidades, guias, clientes, pacotes, vendas);
+
+    return 0;
 }
